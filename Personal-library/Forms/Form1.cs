@@ -18,7 +18,7 @@ namespace Personal_library
             openFileDialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                libraryManager.Deserialize(openFileDialog.FileName);
+                libraryManager = libraryManager.Deserialize(openFileDialog.FileName);
                 isModified = false;
                 UpdateListBox();
             }
@@ -26,7 +26,9 @@ namespace Personal_library
 
         private void UpdateListBox()
         {
-            throw new NotImplementedException();
+            bookBindingSource.DataSource = null;
+            bookBindingSource.DataSource = libraryManager.Books;
+            MessageBox.Show(libraryManager.Books.Count.ToString());
         }
     }
 }

@@ -67,7 +67,7 @@ namespace Personal_library.Models
 
             try
             {
-                string json = File.ReadAllText(path, Encoding.Unicode);
+                string json = File.ReadAllText(path);
                 LibraryManager? deserializedLibrary = JsonSerializer.Deserialize<LibraryManager>(json);
 
                 if (deserializedLibrary != null)
