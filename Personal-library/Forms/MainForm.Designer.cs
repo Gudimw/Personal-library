@@ -123,6 +123,7 @@
             DeleteChoosedBookToolStripMenuItem.Name = "DeleteChoosedBookToolStripMenuItem";
             DeleteChoosedBookToolStripMenuItem.Size = new Size(217, 22);
             DeleteChoosedBookToolStripMenuItem.Text = "Видалити вибрану книгу";
+            DeleteChoosedBookToolStripMenuItem.Click += DeleteChoosedBookToolStripMenuItem_Click;
             // 
             // AddNewBookToolStripMenuItem
             // 

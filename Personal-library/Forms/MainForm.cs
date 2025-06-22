@@ -15,6 +15,7 @@ namespace Personal_library
             InitializeFilterComboBoxes();
 
             this.AcceptButton = button1;
+            listBox1.MouseDoubleClick += booksListBox_MouseDoubleClick;
         }
 
         private void OpenLibraryToolStripMenuItem_Click(object sender, EventArgs e)
@@ -256,7 +257,7 @@ namespace Personal_library
                     libraryManager.AddBook(addedBook);
 
                     UpdateListBox();
-
+                    isModified = true;
                     MessageBox.Show($"Книгу '{addedBook.Title}' успішно додано!", "Додавання книги", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -275,7 +276,7 @@ namespace Personal_library
             if (selectedBook == null)
             {
                 MessageBox.Show("Будь ласка, оберіть книгу для редагування.", "Редагування книги", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return; // Виходимо з методу, якщо книга не обрана
+                return;
             }
 
             // Створюємо копію книги для редагування.
@@ -288,7 +289,75 @@ namespace Personal_library
                     libraryManager.UpdateBook(bookDetailsForm.EditedBook);
 
                     UpdateListBox();
+                    isModified = true;
+                    MessageBox.Show($"Книгу '{bookDetailsForm.EditedBook.Title}' успішно оновлено!", "Редагування книги", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
 
+        private void DeleteChoosedBookToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // 1. Отримуємо обрану книгу.
+            Book selectedBook = null;
+
+            if (listBox1.SelectedItems.Count > 0)
+            {
+                selectedBook = listBox1.SelectedItems[0] as Book;
+            }
+
+            if (selectedBook == null)
+            {
+                MessageBox.Show("Будь ласка, оберіть книгу для видалення.", "Видалення книги", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            DialogResult confirmResult = MessageBox.Show(
+                $"Ви впевнені, що хочете видалити книгу '{selectedBook.Title}'?",
+                "Підтвердження видалення",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (confirmResult == DialogResult.Yes)
+            {
+                try
+                {
+                    libraryManager.DeleteBook(selectedBook.Id);
+
+                    UpdateListBox();
+                    isModified = true;
+                    MessageBox.Show($"Книгу '{selectedBook.Title}' успішно видалено.", "Видалення книги", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Помилка при видаленні книги: {ex.Message}", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void booksListBox_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (listBox1.SelectedItem == null)
+            {
+                return;
+            }
+
+            Book selectedBook = null;
+
+            selectedBook = listBox1.SelectedItem as Book;
+
+            if (selectedBook == null)
+            {
+                MessageBox.Show("Не вдалося знайти дані про вибрану книгу.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            using (BookDetailsForm bookDetailsForm = new BookDetailsForm(selectedBook, libraryManager.Genres))
+            {
+                if (bookDetailsForm.ShowDialog() == DialogResult.OK)
+                {
+                    libraryManager.UpdateBook(bookDetailsForm.EditedBook);
+                    UpdateListBox();
+                    isModified = true;
                     MessageBox.Show($"Книгу '{bookDetailsForm.EditedBook.Title}' успішно оновлено!", "Редагування книги", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
