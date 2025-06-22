@@ -1,6 +1,6 @@
 ﻿namespace Personal_library
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -30,12 +30,12 @@
         {
             components = new System.ComponentModel.Container();
             menuStrip1 = new MenuStrip();
-            файлToolStripMenuItem = new ToolStripMenuItem();
+            FileToolStripMenuItem = new ToolStripMenuItem();
             OpenLibraryToolStripMenuItem = new ToolStripMenuItem();
+            EditToolStripMenuItem = new ToolStripMenuItem();
+            EditSelectedBookToolStripMenuItem = new ToolStripMenuItem();
+            DeleteChoosedBookToolStripMenuItem = new ToolStripMenuItem();
             AddNewBookToolStripMenuItem = new ToolStripMenuItem();
-            редагуванняToolStripMenuItem = new ToolStripMenuItem();
-            редагуватиВибрануКнигуToolStripMenuItem = new ToolStripMenuItem();
-            видалитиВибрануКнигуToolStripMenuItem = new ToolStripMenuItem();
             звітиToolStripMenuItem = new ToolStripMenuItem();
             інвентаризаціяБібліотекиToolStripMenuItem = new ToolStripMenuItem();
             splitContainer1 = new SplitContainer();
@@ -83,19 +83,19 @@
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { файлToolStripMenuItem, редагуванняToolStripMenuItem, звітиToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { FileToolStripMenuItem, EditToolStripMenuItem, звітиToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(1073, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
-            // файлToolStripMenuItem
+            // FileToolStripMenuItem
             // 
-            файлToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { OpenLibraryToolStripMenuItem, AddNewBookToolStripMenuItem });
-            файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            файлToolStripMenuItem.Size = new Size(48, 20);
-            файлToolStripMenuItem.Text = "Файл";
+            FileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { OpenLibraryToolStripMenuItem });
+            FileToolStripMenuItem.Name = "FileToolStripMenuItem";
+            FileToolStripMenuItem.Size = new Size(48, 20);
+            FileToolStripMenuItem.Text = "Файл";
             // 
             // OpenLibraryToolStripMenuItem
             // 
@@ -104,30 +104,32 @@
             OpenLibraryToolStripMenuItem.Text = "Відкрити бібліотеку...";
             OpenLibraryToolStripMenuItem.Click += OpenLibraryToolStripMenuItem_Click;
             // 
+            // EditToolStripMenuItem
+            // 
+            EditToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { EditSelectedBookToolStripMenuItem, DeleteChoosedBookToolStripMenuItem, AddNewBookToolStripMenuItem });
+            EditToolStripMenuItem.Name = "EditToolStripMenuItem";
+            EditToolStripMenuItem.Size = new Size(87, 20);
+            EditToolStripMenuItem.Text = "Редагування";
+            // 
+            // EditSelectedBookToolStripMenuItem
+            // 
+            EditSelectedBookToolStripMenuItem.Name = "EditSelectedBookToolStripMenuItem";
+            EditSelectedBookToolStripMenuItem.Size = new Size(217, 22);
+            EditSelectedBookToolStripMenuItem.Text = "Редагувати вибрану книгу";
+            EditSelectedBookToolStripMenuItem.Click += EditSelectedBookToolStripMenuItem_Click;
+            // 
+            // DeleteChoosedBookToolStripMenuItem
+            // 
+            DeleteChoosedBookToolStripMenuItem.Name = "DeleteChoosedBookToolStripMenuItem";
+            DeleteChoosedBookToolStripMenuItem.Size = new Size(217, 22);
+            DeleteChoosedBookToolStripMenuItem.Text = "Видалити вибрану книгу";
+            // 
             // AddNewBookToolStripMenuItem
             // 
             AddNewBookToolStripMenuItem.Name = "AddNewBookToolStripMenuItem";
-            AddNewBookToolStripMenuItem.Size = new Size(191, 22);
+            AddNewBookToolStripMenuItem.Size = new Size(217, 22);
             AddNewBookToolStripMenuItem.Text = "Додати нову книгу";
-            // 
-            // редагуванняToolStripMenuItem
-            // 
-            редагуванняToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { редагуватиВибрануКнигуToolStripMenuItem, видалитиВибрануКнигуToolStripMenuItem });
-            редагуванняToolStripMenuItem.Name = "редагуванняToolStripMenuItem";
-            редагуванняToolStripMenuItem.Size = new Size(87, 20);
-            редагуванняToolStripMenuItem.Text = "Редагування";
-            // 
-            // редагуватиВибрануКнигуToolStripMenuItem
-            // 
-            редагуватиВибрануКнигуToolStripMenuItem.Name = "редагуватиВибрануКнигуToolStripMenuItem";
-            редагуватиВибрануКнигуToolStripMenuItem.Size = new Size(217, 22);
-            редагуватиВибрануКнигуToolStripMenuItem.Text = "Редагувати вибрану книгу";
-            // 
-            // видалитиВибрануКнигуToolStripMenuItem
-            // 
-            видалитиВибрануКнигуToolStripMenuItem.Name = "видалитиВибрануКнигуToolStripMenuItem";
-            видалитиВибрануКнигуToolStripMenuItem.Size = new Size(217, 22);
-            видалитиВибрануКнигуToolStripMenuItem.Text = "Видалити вибрану книгу";
+            AddNewBookToolStripMenuItem.Click += AddNewBookToolStripMenuItem_Click;
             // 
             // звітиToolStripMenuItem
             // 
@@ -219,7 +221,7 @@
             groupBox4.Controls.Add(radioButton3);
             groupBox4.Controls.Add(radioButton2);
             groupBox4.Controls.Add(radioButton1);
-            groupBox4.Location = new Point(204, 332);
+            groupBox4.Location = new Point(207, 246);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(115, 100);
             groupBox4.TabIndex = 17;
@@ -233,9 +235,9 @@
             radioButton3.Name = "radioButton3";
             radioButton3.Size = new Size(63, 19);
             radioButton3.TabIndex = 18;
-            radioButton3.TabStop = true;
             radioButton3.Text = "Віддані";
             radioButton3.UseVisualStyleBackColor = true;
+            radioButton3.CheckedChanged += radioButton3_CheckedChanged;
             // 
             // radioButton2
             // 
@@ -244,13 +246,14 @@
             radioButton2.Name = "radioButton2";
             radioButton2.Size = new Size(88, 19);
             radioButton2.TabIndex = 17;
-            radioButton2.TabStop = true;
             radioButton2.Text = "У наявності";
             radioButton2.UseVisualStyleBackColor = true;
+            radioButton2.CheckedChanged += radioButton2_CheckedChanged;
             // 
             // radioButton1
             // 
             radioButton1.AutoSize = true;
+            radioButton1.Checked = true;
             radioButton1.Location = new Point(6, 22);
             radioButton1.Name = "radioButton1";
             radioButton1.Size = new Size(41, 19);
@@ -258,6 +261,7 @@
             radioButton1.TabStop = true;
             radioButton1.Text = "Всі";
             radioButton1.UseVisualStyleBackColor = true;
+            radioButton1.CheckedChanged += radioButton1_CheckedChanged;
             // 
             // groupBox3
             // 
@@ -267,7 +271,7 @@
             groupBox3.Controls.Add(label8);
             groupBox3.Location = new Point(8, 246);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(311, 80);
+            groupBox3.Size = new Size(125, 80);
             groupBox3.TabIndex = 15;
             groupBox3.TabStop = false;
             groupBox3.Text = "Рік видання";
@@ -276,15 +280,17 @@
             // 
             textBox4.Location = new Point(38, 19);
             textBox4.Name = "textBox4";
-            textBox4.Size = new Size(267, 23);
+            textBox4.Size = new Size(77, 23);
             textBox4.TabIndex = 17;
+            textBox4.TextChanged += textBox4_TextChanged;
             // 
             // textBox3
             // 
             textBox3.Location = new Point(38, 48);
             textBox3.Name = "textBox3";
-            textBox3.Size = new Size(267, 23);
+            textBox3.Size = new Size(77, 23);
             textBox3.TabIndex = 19;
+            textBox3.TextChanged += textBox3_TextChanged;
             // 
             // label9
             // 
@@ -323,6 +329,7 @@
             trackBar2.Size = new Size(224, 45);
             trackBar2.TabIndex = 13;
             trackBar2.Value = 5;
+            trackBar2.Scroll += trackBar2_Scroll;
             // 
             // label6
             // 
@@ -343,6 +350,7 @@
             trackBar1.Size = new Size(224, 45);
             trackBar1.TabIndex = 11;
             trackBar1.Value = 1;
+            trackBar1.Scroll += trackBar1_Scroll;
             // 
             // label5
             // 
@@ -361,6 +369,7 @@
             comboBox3.Name = "comboBox3";
             comboBox3.Size = new Size(190, 23);
             comboBox3.TabIndex = 9;
+            comboBox3.SelectedIndexChanged += comboBox3_SelectedIndexChanged;
             // 
             // label4
             // 
@@ -379,6 +388,7 @@
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(224, 23);
             comboBox2.TabIndex = 7;
+            comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
             // 
             // label3
             // 
@@ -397,6 +407,7 @@
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(264, 23);
             comboBox1.TabIndex = 5;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // textBox2
             // 
@@ -404,6 +415,7 @@
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(264, 23);
             textBox2.TabIndex = 4;
+            textBox2.TextChanged += textBox2_TextChanged;
             // 
             // label2
             // 
@@ -420,6 +432,7 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(230, 23);
             textBox1.TabIndex = 2;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // label1
             // 
@@ -438,8 +451,9 @@
             button1.TabIndex = 0;
             button1.Text = "Пошук";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
-            // Form1
+            // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -447,7 +461,7 @@
             Controls.Add(splitContainer1);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
-            Name = "Form1";
+            Name = "MainForm";
             Text = "Form1";
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
@@ -472,12 +486,11 @@
         #endregion
 
         private MenuStrip menuStrip1;
-        private ToolStripMenuItem файлToolStripMenuItem;
+        private ToolStripMenuItem FileToolStripMenuItem;
         private ToolStripMenuItem OpenLibraryToolStripMenuItem;
-        private ToolStripMenuItem AddNewBookToolStripMenuItem;
-        private ToolStripMenuItem редагуванняToolStripMenuItem;
-        private ToolStripMenuItem редагуватиВибрануКнигуToolStripMenuItem;
-        private ToolStripMenuItem видалитиВибрануКнигуToolStripMenuItem;
+        private ToolStripMenuItem EditToolStripMenuItem;
+        private ToolStripMenuItem EditSelectedBookToolStripMenuItem;
+        private ToolStripMenuItem DeleteChoosedBookToolStripMenuItem;
         private ToolStripMenuItem звітиToolStripMenuItem;
         private ToolStripMenuItem інвентаризаціяБібліотекиToolStripMenuItem;
         private SplitContainer splitContainer1;
@@ -509,5 +522,6 @@
         private RadioButton radioButton3;
         private RadioButton radioButton2;
         private RadioButton radioButton1;
+        private ToolStripMenuItem AddNewBookToolStripMenuItem;
     }
 }
