@@ -62,7 +62,7 @@ namespace Personal_library.Forms
             // Заповнюємо поля форми даними з об'єкта EditedBook
             textBox1.Text = EditedBook.Title;
             textBox2.Text = EditedBook.Author;
-            textBox3.Text = EditedBook.Publisher;
+            textBox3.Text = EditedBook.PublisherName;
 
             // Встановлюємо вибраний жанр у ComboBox
             if (EditedBook.GenreId != Guid.Empty)
@@ -111,7 +111,7 @@ namespace Personal_library.Forms
                 // Зчитуємо дані з полів форми в об'єкт EditedBook
                 EditedBook.Title = textBox1.Text.Trim();
                 EditedBook.Author = textBox2.Text.Trim();
-                EditedBook.Publisher = textBox3.Text.Trim();
+                EditedBook.PublisherName = textBox3.Text.Trim();
                 EditedBook.PublicationYear = (int)numericUpDown1.Value;
 
                 // Встановлюємо GenreId з вибраного елемента ComboBox

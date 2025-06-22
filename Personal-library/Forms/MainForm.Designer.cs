@@ -67,6 +67,7 @@
             textBox1 = new TextBox();
             label1 = new Label();
             button1 = new Button();
+            SaveLibraryToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -92,7 +93,7 @@
             // 
             // FileToolStripMenuItem
             // 
-            FileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { OpenLibraryToolStripMenuItem });
+            FileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { OpenLibraryToolStripMenuItem, SaveLibraryToolStripMenuItem });
             FileToolStripMenuItem.Name = "FileToolStripMenuItem";
             FileToolStripMenuItem.Size = new Size(48, 20);
             FileToolStripMenuItem.Text = "Файл";
@@ -100,7 +101,7 @@
             // OpenLibraryToolStripMenuItem
             // 
             OpenLibraryToolStripMenuItem.Name = "OpenLibraryToolStripMenuItem";
-            OpenLibraryToolStripMenuItem.Size = new Size(191, 22);
+            OpenLibraryToolStripMenuItem.Size = new Size(193, 22);
             OpenLibraryToolStripMenuItem.Text = "Відкрити бібліотеку...";
             OpenLibraryToolStripMenuItem.Click += OpenLibraryToolStripMenuItem_Click;
             // 
@@ -454,6 +455,13 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // SaveLibraryToolStripMenuItem
+            // 
+            SaveLibraryToolStripMenuItem.Name = "SaveLibraryToolStripMenuItem";
+            SaveLibraryToolStripMenuItem.Size = new Size(193, 22);
+            SaveLibraryToolStripMenuItem.Text = "Зберегти бібліотеку...";
+            SaveLibraryToolStripMenuItem.Click += SaveLibraryToolStripMenuItem_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -524,5 +532,6 @@
         private RadioButton radioButton2;
         private RadioButton radioButton1;
         private ToolStripMenuItem AddNewBookToolStripMenuItem;
+        private ToolStripMenuItem SaveLibraryToolStripMenuItem;
     }
 }

@@ -24,7 +24,7 @@ namespace Personal_library
             openFileDialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                libraryManager = libraryManager.Deserialize(openFileDialog.FileName);
+                libraryManager = libraryManager.Load(openFileDialog.FileName);
                 isModified = false;
                 UpdateListBox();
                 InitializeFilterComboBoxes();
@@ -92,7 +92,7 @@ namespace Personal_library
             if (comboBox2.SelectedItem != null && comboBox2.SelectedItem.ToString() != "Всі")
             {
                 string selectedPublisher = comboBox2.SelectedItem.ToString();
-                filteredBooks = filteredBooks.Where(b => b.Publisher.Equals(selectedPublisher, StringComparison.OrdinalIgnoreCase));
+                filteredBooks = filteredBooks.Where(b => b.PublisherName.Equals(selectedPublisher, StringComparison.OrdinalIgnoreCase));
             }
 
             // 4. Фільтрація за походженням книги (ComboBox3)
@@ -156,7 +156,7 @@ namespace Personal_library
             }
 
             // Заповнюємо ComboBox для видавництв
-            var uniquePublishers = libraryManager.Books.Select(b => b.Publisher).Distinct().OrderBy(p => p).ToList();
+            var uniquePublishers = libraryManager.Books.Select(b => b.PublisherName).Distinct().OrderBy(p => p).ToList();
             foreach (var publisher in uniquePublishers)
             {
                 comboBox2.Items.Add(publisher);
@@ -279,7 +279,7 @@ namespace Personal_library
                 return;
             }
 
-            // Створюємо копію книги для редагування.
+            // Створюємо копію книги для редагування
             Book bookToEdit = selectedBook;
 
             using (BookDetailsForm bookDetailsForm = new BookDetailsForm(bookToEdit, libraryManager.Genres))
@@ -297,7 +297,6 @@ namespace Personal_library
 
         private void DeleteChoosedBookToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // 1. Отримуємо обрану книгу.
             Book selectedBook = null;
 
             if (listBox1.SelectedItems.Count > 0)
@@ -362,5 +361,29 @@ namespace Personal_library
                 }
             }
         }
+
+        private void SaveLibraryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+
+            saveFileDialog.Filter = "JSON Files (*.json)|*.json|All files (*.*)|*.*"; 
+            saveFileDialog.Title = "Зберегти файл бібліотеки"; 
+            //saveFileDialog.FileName = Path.GetFileName(_currentFilePath); 
+            //saveFileDialog.InitialDirectory = Path.GetDirectoryName(_currentFilePath);
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    libraryManager.Save(saveFileDialog.FileName);
+                    MessageBox.Show("Бібліотеку успішно збережено!", "Збереження", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Помилка при збереженні бібліотеки: {ex.Message}", "Помилка збереження", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
     }
 }
