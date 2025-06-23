@@ -57,7 +57,7 @@ namespace Personal_library
         {
             IEnumerable<Book> filteredBooks = libraryManager.Books;
 
-            // 1. Фільтрація за текстовими полями (Назва, Автор, Опис)
+            // Фільтрація за текстовими полями (Назва, Автор, Опис)
             string searchText = textBox1.Text.Trim().ToLower(); // Пошук за назвою
             string authorText = textBox2.Text.Trim().ToLower(); // Пошук за автором
 
@@ -366,8 +366,8 @@ namespace Personal_library
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
 
-            saveFileDialog.Filter = "JSON Files (*.json)|*.json|All files (*.*)|*.*"; 
-            saveFileDialog.Title = "Зберегти файл бібліотеки"; 
+            saveFileDialog.Filter = "JSON Files (*.json)|*.json|All files (*.*)|*.*";
+            saveFileDialog.Title = "Зберегти файл бібліотеки";
             //saveFileDialog.FileName = Path.GetFileName(_currentFilePath); 
             //saveFileDialog.InitialDirectory = Path.GetDirectoryName(_currentFilePath);
 
@@ -385,5 +385,18 @@ namespace Personal_library
             }
         }
 
+        private void GenresEditToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (GenresEditForm genresManagerForm = new GenresEditForm(libraryManager))
+            {
+                genresManagerForm.ShowDialog();
+
+                InitializeFilterComboBoxes();
+
+                UpdateListBox();
+
+                isModified = true;
+            }
+        }
     }
 }

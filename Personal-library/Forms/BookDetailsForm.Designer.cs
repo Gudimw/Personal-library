@@ -44,14 +44,14 @@
             button2 = new Button();
             groupBox1 = new GroupBox();
             groupBox2 = new GroupBox();
-            label7 = new Label();
-            checkBox1 = new CheckBox();
-            label8 = new Label();
-            textBox4 = new TextBox();
-            trackBar1 = new TrackBar();
-            label9 = new Label();
-            textBox5 = new TextBox();
             label10 = new Label();
+            textBox5 = new TextBox();
+            label9 = new Label();
+            trackBar1 = new TrackBar();
+            textBox4 = new TextBox();
+            label8 = new Label();
+            checkBox1 = new CheckBox();
+            label7 = new Label();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -169,6 +169,7 @@
             button1.TabIndex = 13;
             button1.Text = "Зберегти";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += BtnSave_Click;
             // 
             // button2
             // 
@@ -179,6 +180,7 @@
             button2.TabIndex = 14;
             button2.Text = "Скасувати";
             button2.UseVisualStyleBackColor = true;
+            button1.Click += BtnCancel_Click;
             // 
             // groupBox1
             // 
@@ -218,39 +220,31 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Додаткова інформація та статус";
             // 
-            // label7
+            // label10
             // 
-            label7.AutoSize = true;
-            label7.Location = new Point(7, 56);
-            label7.Name = "label7";
-            label7.Size = new Size(76, 15);
-            label7.TabIndex = 13;
-            label7.Text = "Доступність:";
+            label10.AutoSize = true;
+            label10.Location = new Point(7, 154);
+            label10.Name = "label10";
+            label10.Size = new Size(39, 15);
+            label10.TabIndex = 19;
+            label10.Text = "Опис:";
             // 
-            // checkBox1
+            // textBox5
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(89, 57);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(15, 14);
-            checkBox1.TabIndex = 14;
-            checkBox1.UseVisualStyleBackColor = true;
+            textBox5.Location = new Point(52, 151);
+            textBox5.Multiline = true;
+            textBox5.Name = "textBox5";
+            textBox5.Size = new Size(258, 71);
+            textBox5.TabIndex = 18;
             // 
-            // label8
+            // label9
             // 
-            label8.AutoSize = true;
-            label8.Location = new Point(7, 84);
-            label8.Name = "label8";
-            label8.Size = new Size(82, 15);
-            label8.TabIndex = 15;
-            label8.Text = "Кому віддана:";
-            // 
-            // textBox4
-            // 
-            textBox4.Location = new Point(95, 81);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(100, 23);
-            textBox4.TabIndex = 11;
+            label9.AutoSize = true;
+            label9.Location = new Point(7, 120);
+            label9.Name = "label9";
+            label9.Size = new Size(54, 15);
+            label9.TabIndex = 17;
+            label9.Text = "Рейтинг:";
             // 
             // trackBar1
             // 
@@ -262,31 +256,39 @@
             trackBar1.TabIndex = 16;
             trackBar1.Value = 1;
             // 
-            // label9
+            // textBox4
             // 
-            label9.AutoSize = true;
-            label9.Location = new Point(7, 120);
-            label9.Name = "label9";
-            label9.Size = new Size(54, 15);
-            label9.TabIndex = 17;
-            label9.Text = "Рейтинг:";
+            textBox4.Location = new Point(95, 81);
+            textBox4.Name = "textBox4";
+            textBox4.Size = new Size(100, 23);
+            textBox4.TabIndex = 11;
             // 
-            // textBox5
+            // label8
             // 
-            textBox5.Location = new Point(52, 151);
-            textBox5.Multiline = true;
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(258, 71);
-            textBox5.TabIndex = 18;
+            label8.AutoSize = true;
+            label8.Location = new Point(7, 84);
+            label8.Name = "label8";
+            label8.Size = new Size(82, 15);
+            label8.TabIndex = 15;
+            label8.Text = "Кому віддана:";
             // 
-            // label10
+            // checkBox1
             // 
-            label10.AutoSize = true;
-            label10.Location = new Point(7, 154);
-            label10.Name = "label10";
-            label10.Size = new Size(39, 15);
-            label10.TabIndex = 19;
-            label10.Text = "Опис:";
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(89, 57);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(15, 14);
+            checkBox1.TabIndex = 14;
+            checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(7, 56);
+            label7.Name = "label7";
+            label7.Size = new Size(76, 15);
+            label7.TabIndex = 13;
+            label7.Text = "Доступність:";
             // 
             // BookDetailsForm
             // 
