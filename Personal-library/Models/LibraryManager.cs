@@ -8,7 +8,6 @@ namespace Personal_library.Models
     {
         public List<Book> Books { get; set; } = new List<Book>();
         public List<Genre> Genres { get; set; } = new List<Genre>();
-        public List<Publisher> Publishers { get; set; } = new List<Publisher>();
 
 
         private JsonSerializerOptions options = new JsonSerializerOptions
@@ -33,13 +32,6 @@ namespace Personal_library.Models
                 Genres.Add(new Genre { Name = "Фантастика", Description = "Жанр, що містить елементи наукової фантастики, фентезі та жахів." });
                 Genres.Add(new Genre { Name = "Детектив", Description = "Жанр, зосереджений на розслідуванні злочинів." });
                 Genres.Add(new Genre { Name = "Роман", Description = "Літературний жанр, що розповідає про події та досвід персонажів." });
-            }
-
-            if (!Publishers.Any())
-            {
-                Publishers.Add(new Publisher { Name = "Книголав" });
-                Publishers.Add(new Publisher { Name = "Наш Формат" });
-                Publishers.Add(new Publisher { Name = "Видавництво Старого Лева" });
             }
 
             // if (!Books.Any() && Genres.Any() && Publishers.Any())
@@ -70,9 +62,9 @@ namespace Personal_library.Models
         /// <summary>
         /// Повертає список книг, виданих певним видавцем.
         /// </summary>
-        public List<Book> GetBooksByPublisher(Guid publisherId)
+        public List<Book> GetBooksByPublisher(string PublisherName)
         {
-            return Books.Where(b => b.PublisherId == publisherId).ToList();
+            return Books.Where(b => b.PublisherName == PublisherName).ToList();
         }
 
         /// <summary>
@@ -89,8 +81,6 @@ namespace Personal_library.Models
             catch (Exception ex)
             {
                 Console.WriteLine($"Помилка при збереженні файлу '{path}': {ex.Message}");
-                // Можна також кинути виняток, щоб викликаючий код міг його обробити
-                // throw; 
             }
         }
 
@@ -121,7 +111,6 @@ namespace Personal_library.Models
                 {
                     deserializedLibrary.Books = deserializedLibrary.Books ?? new List<Book>();
                     deserializedLibrary.Genres = deserializedLibrary.Genres ?? new List<Genre>();
-                    deserializedLibrary.Publishers = deserializedLibrary.Publishers ?? new List<Publisher>();
 
                     deserializedLibrary.InitializeDefaultData();
 
@@ -174,11 +163,6 @@ namespace Personal_library.Models
         /// </summary>
         public void UpdateBooksPublisherNames()
         {
-            foreach (var book in Books)
-            {
-                var publisher = Publishers.FirstOrDefault(p => p.Id == book.PublisherId);
-                book.PublisherName = publisher?.Name ?? "Невідомий видавець";
-            }
         }
 
         /// <summary>
@@ -203,7 +187,7 @@ namespace Personal_library.Models
                 // Копіюємо дані з оновленої книги
                 existingBook.Title = updatedBook.Title;
                 existingBook.Author = updatedBook.Author;
-                existingBook.PublisherId = updatedBook.PublisherId;
+                existingBook.PublisherName = updatedBook.PublisherName;
                 existingBook.PublicationYear = updatedBook.PublicationYear;
                 existingBook.GenreId = updatedBook.GenreId;
                 existingBook.Origin = updatedBook.Origin;
@@ -291,66 +275,6 @@ namespace Personal_library.Models
             else
             {
                 throw new ArgumentException($"Жанр з ID {updatedGenre.Id} не знайдено для оновлення.");
-            }
-        }
-
-        // --- Методи для керування видавцями ---
-
-        /// <summary>
-        /// Додає нового видавця до бібліотеки.
-        /// </summary>
-        public void AddPublisher(Publisher publisher)
-        {
-            if (publisher == null) throw new ArgumentNullException(nameof(publisher));
-
-            if (Publishers.Any(p => p.Name.Equals(publisher.Name, StringComparison.OrdinalIgnoreCase)))
-            {
-                throw new ArgumentException($"Видавець з назвою '{publisher.Name}' вже існує.");
-            }
-            Publishers.Add(publisher);
-        }
-
-        /// <summary>
-        /// Видаляє видавця за його ID.
-        /// Не дозволяє видалити видавця, якщо до нього прив'язані книги.
-        /// </summary>
-        public void DeletePublisher(Guid publisherId)
-        {
-            if (Books.Any(b => b.PublisherId == publisherId))
-            {
-                throw new InvalidOperationException("Неможливо видалити видавця, оскільки до нього прив'язані книги.");
-            }
-            var publisherToRemove = Publishers.FirstOrDefault(p => p.Id == publisherId);
-            if (publisherToRemove != null)
-            {
-                Publishers.Remove(publisherToRemove);
-            }
-            else
-            {
-                throw new ArgumentException($"Видавця з ID {publisherId} не знайдено для видалення.");
-            }
-        }
-
-        /// <summary>
-        /// Оновлює інформацію про існуючого видавця.
-        /// </summary>
-        public void UpdatePublisher(Publisher updatedPublisher)
-        {
-            var existingPublisher = Publishers.FirstOrDefault(p => p.Id == updatedPublisher.Id);
-            if (existingPublisher != null)
-            {
-                // Перевірка на унікальність назви видавця під час оновлення
-                if (!existingPublisher.Name.Equals(updatedPublisher.Name, StringComparison.OrdinalIgnoreCase) && Publishers.Any(p => p.Name.Equals(updatedPublisher.Name, StringComparison.OrdinalIgnoreCase) && p.Id != updatedPublisher.Id))
-                {
-                    throw new ArgumentException($"Видавець з назвою '{updatedPublisher.Name}' вже існує.");
-                }
-                existingPublisher.Name = updatedPublisher.Name;
-
-                UpdateBooksPublisherNames();
-            }
-            else
-            {
-                throw new ArgumentException($"Видавця з ID {updatedPublisher.Id} не знайдено для оновлення.");
             }
         }
     }

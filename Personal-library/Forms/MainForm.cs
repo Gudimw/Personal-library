@@ -27,6 +27,7 @@ namespace Personal_library
                 libraryManager = libraryManager.Load(openFileDialog.FileName);
                 isModified = false;
                 UpdateListBox();
+
                 InitializeFilterComboBoxes();
             }
         }
@@ -187,57 +188,46 @@ namespace Personal_library
         {
             UpdateListBox();
         }
-
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
             UpdateListBox();
         }
-
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateListBox();
         }
-
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateListBox();
         }
-
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateListBox();
         }
-
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             UpdateListBox();
         }
-
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
             UpdateListBox();
         }
-
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
             UpdateListBox();
         }
-
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
             UpdateListBox();
         }
-
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             UpdateListBox();
         }
-
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             UpdateListBox();
         }
-
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
         {
             UpdateListBox();
@@ -257,6 +247,7 @@ namespace Personal_library
                     libraryManager.AddBook(addedBook);
 
                     UpdateListBox();
+                    UpdateCombobox();
                     isModified = true;
                     MessageBox.Show($"Книгу '{addedBook.Title}' успішно додано!", "Додавання книги", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -289,6 +280,7 @@ namespace Personal_library
                     libraryManager.UpdateBook(bookDetailsForm.EditedBook);
 
                     UpdateListBox();
+                    UpdateCombobox();
                     isModified = true;
                     MessageBox.Show($"Книгу '{bookDetailsForm.EditedBook.Title}' успішно оновлено!", "Редагування книги", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -323,6 +315,7 @@ namespace Personal_library
                     libraryManager.DeleteBook(selectedBook.Id);
 
                     UpdateListBox();
+                    UpdateCombobox();
                     isModified = true;
                     MessageBox.Show($"Книгу '{selectedBook.Title}' успішно видалено.", "Видалення книги", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -339,7 +332,6 @@ namespace Personal_library
             {
                 return;
             }
-
             Book selectedBook = null;
 
             selectedBook = listBox1.SelectedItem as Book;
@@ -356,9 +348,11 @@ namespace Personal_library
                 {
                     libraryManager.UpdateBook(bookDetailsForm.EditedBook);
                     UpdateListBox();
+                    UpdateCombobox();
                     isModified = true;
                     MessageBox.Show($"Книгу '{bookDetailsForm.EditedBook.Title}' успішно оновлено!", "Редагування книги", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+
             }
         }
 
@@ -394,8 +388,84 @@ namespace Personal_library
                 InitializeFilterComboBoxes();
 
                 UpdateListBox();
-
+                UpdateCombobox();
                 isModified = true;
+            }
+        }
+
+        private void PublisherEditToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //using (PublisherEditForm publishersManagerForm = new PublisherEditForm(libraryManager))
+            //{
+            //    publishersManagerForm.ShowDialog();
+
+            //    InitializeFilterComboBoxes();
+
+            //    UpdateListBox();
+
+            //    isModified = true;
+            //}
+        }
+
+        public void UpdateCombobox()
+        {
+            string selectedGenreText = comboBox1.SelectedItem?.ToString();
+            string selectedPublisherText = comboBox2.SelectedItem?.ToString();
+            string selectedOriginText = comboBox3.SelectedItem?.ToString();
+
+            // Очищаємо ComboBox'и перед заповненням
+            comboBox1.Items.Clear(); // Жанр
+            comboBox2.Items.Clear(); // Видавництво
+            comboBox3.Items.Clear(); // Походження книги
+
+            // Додаємо опцію "Всі"
+            comboBox1.Items.Add("Всі");
+            comboBox2.Items.Add("Всі");
+            comboBox3.Items.Add("Всі");
+
+            var uniqueGenres = libraryManager.Genres.Select(g => g.Name).Distinct().OrderBy(name => name).ToList();
+            foreach (var genreName in uniqueGenres)
+            {
+                comboBox1.Items.Add(genreName);
+            }
+
+            var uniquePublishers = libraryManager.Books.Select(b => b.PublisherName).Distinct().OrderBy(p => p).ToList();
+            foreach (var publisher in uniquePublishers)
+            {
+                comboBox2.Items.Add(publisher);
+            }
+
+            var uniqueOrigins = libraryManager.Books.Select(b => b.Origin).Distinct().OrderBy(o => o).ToList();
+            foreach (var origin in uniqueOrigins)
+            {
+                comboBox3.Items.Add(origin);
+            }
+
+            if (!string.IsNullOrEmpty(selectedGenreText) && comboBox1.Items.Contains(selectedGenreText))
+            {
+                comboBox1.SelectedItem = selectedGenreText;
+            }
+            else
+            {
+                comboBox1.SelectedItem = "Всі";
+            }
+
+            if (!string.IsNullOrEmpty(selectedPublisherText) && comboBox2.Items.Contains(selectedPublisherText))
+            {
+                comboBox2.SelectedItem = selectedPublisherText;
+            }
+            else
+            {
+                comboBox2.SelectedItem = "Всі";
+            }
+
+            if (!string.IsNullOrEmpty(selectedOriginText) && comboBox3.Items.Contains(selectedOriginText))
+            {
+                comboBox3.SelectedItem = selectedOriginText;
+            }
+            else
+            {
+                comboBox3.SelectedItem = "Всі";
             }
         }
     }

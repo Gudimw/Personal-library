@@ -37,6 +37,7 @@
             EditSelectedBookToolStripMenuItem = new ToolStripMenuItem();
             DeleteChoosedBookToolStripMenuItem = new ToolStripMenuItem();
             AddNewBookToolStripMenuItem = new ToolStripMenuItem();
+            GenresEditToolStripMenuItem = new ToolStripMenuItem();
             звітиToolStripMenuItem = new ToolStripMenuItem();
             інвентаризаціяБібліотекиToolStripMenuItem = new ToolStripMenuItem();
             splitContainer1 = new SplitContainer();
@@ -68,7 +69,7 @@
             textBox1 = new TextBox();
             label1 = new Label();
             button1 = new Button();
-            GenresEditToolStripMenuItem = new ToolStripMenuItem();
+            PublisherEditToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -115,7 +116,7 @@
             // 
             // EditToolStripMenuItem
             // 
-            EditToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { EditSelectedBookToolStripMenuItem, DeleteChoosedBookToolStripMenuItem, AddNewBookToolStripMenuItem, GenresEditToolStripMenuItem });
+            EditToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { EditSelectedBookToolStripMenuItem, DeleteChoosedBookToolStripMenuItem, AddNewBookToolStripMenuItem, GenresEditToolStripMenuItem, PublisherEditToolStripMenuItem });
             EditToolStripMenuItem.Name = "EditToolStripMenuItem";
             EditToolStripMenuItem.Size = new Size(87, 20);
             EditToolStripMenuItem.Text = "Редагування";
@@ -140,6 +141,13 @@
             AddNewBookToolStripMenuItem.Size = new Size(217, 22);
             AddNewBookToolStripMenuItem.Text = "Додати нову книгу";
             AddNewBookToolStripMenuItem.Click += AddNewBookToolStripMenuItem_Click;
+            // 
+            // GenresEditToolStripMenuItem
+            // 
+            GenresEditToolStripMenuItem.Name = "GenresEditToolStripMenuItem";
+            GenresEditToolStripMenuItem.Size = new Size(217, 22);
+            GenresEditToolStripMenuItem.Text = "Редактор жанрів";
+            GenresEditToolStripMenuItem.Click += GenresEditToolStripMenuItem_Click;
             // 
             // звітиToolStripMenuItem
             // 
@@ -463,12 +471,12 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // GenresEditToolStripMenuItem
+            // PublisherEditToolStripMenuItem
             // 
-            GenresEditToolStripMenuItem.Name = "GenresEditToolStripMenuItem";
-            GenresEditToolStripMenuItem.Size = new Size(217, 22);
-            GenresEditToolStripMenuItem.Text = "Редактор жанрів";
-            GenresEditToolStripMenuItem.Click += GenresEditToolStripMenuItem_Click;
+            PublisherEditToolStripMenuItem.Name = "PublisherEditToolStripMenuItem";
+            PublisherEditToolStripMenuItem.Size = new Size(217, 22);
+            PublisherEditToolStripMenuItem.Text = "Редактор видавництв";
+            PublisherEditToolStripMenuItem.Click += PublisherEditToolStripMenuItem_Click;
             // 
             // MainForm
             // 
@@ -542,5 +550,6 @@
         private ToolStripMenuItem AddNewBookToolStripMenuItem;
         private ToolStripMenuItem SaveLibraryToolStripMenuItem;
         private ToolStripMenuItem GenresEditToolStripMenuItem;
+        private ToolStripMenuItem PublisherEditToolStripMenuItem;
     }
 }

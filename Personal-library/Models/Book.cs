@@ -12,7 +12,7 @@ namespace Personal_library.Models
         public Guid Id { get; set; }
         public string Title { get; set; } = string.Empty;
         public string Author { get; set; } = string.Empty;
-        public Guid PublisherId { get; set; }
+        public string PublisherName { get; set; } = "Невідомий видавець";
         public int PublicationYear { get; set; }
         public Guid GenreId { get; set; }
         public string Origin { get; set; } = string.Empty;
@@ -25,8 +25,6 @@ namespace Personal_library.Models
         [JsonIgnore]
         public string GenreName { get; set; } = "Невідомий жанр";
 
-        [JsonIgnore]
-        public string PublisherName { get; set; } = "Невідомий видавець";
 
         public Book()
         {
@@ -44,7 +42,6 @@ namespace Personal_library.Models
                 Id = this.Id,
                 Title = this.Title,
                 Author = this.Author,
-                PublisherId = this.PublisherId,
                 PublicationYear = this.PublicationYear,
                 GenreId = this.GenreId,
                 Origin = this.Origin,

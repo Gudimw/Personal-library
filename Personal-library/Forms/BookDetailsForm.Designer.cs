@@ -169,7 +169,7 @@
             button1.TabIndex = 13;
             button1.Text = "Зберегти";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += BtnSave_Click;
+            button1.Click += BtnCancel_Click;
             // 
             // button2
             // 
@@ -180,7 +180,7 @@
             button2.TabIndex = 14;
             button2.Text = "Скасувати";
             button2.UseVisualStyleBackColor = true;
-            button1.Click += BtnCancel_Click;
+            button1.Click += BtnSave_Click;
             // 
             // groupBox1
             // 
