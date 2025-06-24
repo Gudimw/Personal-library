@@ -42,6 +42,7 @@
             LibraryStatsToolStripMenuItem = new ToolStripMenuItem();
             splitContainer1 = new SplitContainer();
             groupBox1 = new GroupBox();
+            listView1 = new ListView();
             listBox1 = new ListBox();
             bookBindingSource = new BindingSource(components);
             groupBox2 = new GroupBox();
@@ -185,6 +186,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(listView1);
             groupBox1.Controls.Add(listBox1);
             groupBox1.Dock = DockStyle.Fill;
             groupBox1.Location = new Point(0, 0);
@@ -194,15 +196,24 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Книжки";
             // 
+            // listView1
+            // 
+            listView1.Dock = DockStyle.Fill;
+            listView1.Location = new Point(3, 19);
+            listView1.MultiSelect = false;
+            listView1.Name = "listView1";
+            listView1.Size = new Size(738, 546);
+            listView1.TabIndex = 1;
+            listView1.UseCompatibleStateImageBehavior = false;
+            // 
             // listBox1
             // 
             listBox1.DataSource = bookBindingSource;
-            listBox1.Dock = DockStyle.Fill;
             listBox1.FormattingEnabled = true;
             listBox1.ItemHeight = 15;
-            listBox1.Location = new Point(3, 19);
+            listBox1.Location = new Point(418, 370);
             listBox1.Name = "listBox1";
-            listBox1.Size = new Size(738, 546);
+            listBox1.Size = new Size(144, 109);
             listBox1.TabIndex = 0;
             // 
             // bookBindingSource
@@ -568,5 +579,6 @@
         private ToolStripMenuItem GenresEditToolStripMenuItem;
         private Label label10;
         private ComboBox comboBox4;
+        private ListView listView1;
     }
 }

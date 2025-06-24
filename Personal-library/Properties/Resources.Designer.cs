@@ -59,5 +59,15 @@ namespace Personal_library.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] book_png_3 {
+            get {
+                object obj = ResourceManager.GetObject("book-png-3", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

@@ -43,6 +43,8 @@
             button1 = new Button();
             button2 = new Button();
             groupBox1 = new GroupBox();
+            comboBox3 = new ComboBox();
+            label11 = new Label();
             groupBox2 = new GroupBox();
             label10 = new Label();
             textBox5 = new TextBox();
@@ -52,8 +54,8 @@
             label8 = new Label();
             checkBox1 = new CheckBox();
             label7 = new Label();
-            comboBox3 = new ComboBox();
-            label11 = new Label();
+            label12 = new Label();
+            button3 = new Button();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
@@ -165,7 +167,7 @@
             // button1
             // 
             button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button1.Location = new Point(303, 491);
+            button1.Location = new Point(303, 515);
             button1.Name = "button1";
             button1.Size = new Size(102, 33);
             button1.TabIndex = 13;
@@ -176,7 +178,7 @@
             // button2
             // 
             button2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            button2.Location = new Point(12, 491);
+            button2.Location = new Point(12, 515);
             button2.Name = "button2";
             button2.Size = new Size(102, 33);
             button2.TabIndex = 14;
@@ -204,8 +206,28 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Основна інформація";
             // 
+            // comboBox3
+            // 
+            comboBox3.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox3.FormattingEnabled = true;
+            comboBox3.Location = new Point(54, 165);
+            comboBox3.Name = "comboBox3";
+            comboBox3.Size = new Size(121, 23);
+            comboBox3.TabIndex = 12;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(7, 168);
+            label11.Name = "label11";
+            label11.Size = new Size(45, 15);
+            label11.TabIndex = 11;
+            label11.Text = "Розділ:";
+            // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(button3);
+            groupBox2.Controls.Add(label12);
             groupBox2.Controls.Add(label10);
             groupBox2.Controls.Add(textBox5);
             groupBox2.Controls.Add(label9);
@@ -216,9 +238,9 @@
             groupBox2.Controls.Add(label7);
             groupBox2.Controls.Add(label6);
             groupBox2.Controls.Add(comboBox2);
-            groupBox2.Location = new Point(12, 250);
+            groupBox2.Location = new Point(12, 221);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(393, 235);
+            groupBox2.Size = new Size(393, 288);
             groupBox2.TabIndex = 16;
             groupBox2.TabStop = false;
             groupBox2.Text = "Додаткова інформація та статус";
@@ -293,29 +315,30 @@
             label7.TabIndex = 13;
             label7.Text = "Доступність:";
             // 
-            // comboBox3
+            // label12
             // 
-            comboBox3.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(54, 165);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(121, 23);
-            comboBox3.TabIndex = 12;
+            label12.AutoSize = true;
+            label12.Location = new Point(6, 234);
+            label12.Name = "label12";
+            label12.Size = new Size(79, 15);
+            label12.TabIndex = 20;
+            label12.Text = "Зображення:";
             // 
-            // label11
+            // button3
             // 
-            label11.AutoSize = true;
-            label11.Location = new Point(7, 168);
-            label11.Name = "label11";
-            label11.Size = new Size(45, 15);
-            label11.TabIndex = 11;
-            label11.Text = "Розділ:";
+            button3.Location = new Point(87, 230);
+            button3.Name = "button3";
+            button3.Size = new Size(88, 23);
+            button3.TabIndex = 21;
+            button3.Text = "Завантажити";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // BookDetailsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(417, 536);
+            ClientSize = new Size(417, 560);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(button2);
@@ -359,5 +382,7 @@
         private TextBox textBox4;
         private ComboBox comboBox3;
         private Label label11;
+        private Label label12;
+        private Button button3;
     }
 }

@@ -1,5 +1,6 @@
 using Personal_library.Forms;
 using Personal_library.Models;
+using Personal_library.Properties;
 using System.IO; // Додайте цей using для Path
 
 namespace Personal_library
@@ -14,6 +15,8 @@ namespace Personal_library
         {
             InitializeComponent();
             libraryManager = new LibraryManager();
+
+            listView1.DoubleClick += listView1_DoubleClick;
 
             InitializeFilterComboBoxes();
 
@@ -53,14 +56,53 @@ namespace Personal_library
         private void UpdateListBox()
         {
             var filteredBooks = ApplyFilters();
+            listView1.Items.Clear();
+            listView1.LargeImageList = new ImageList { ImageSize = new Size(64, 96) };
 
-            bookBindingSource.DataSource = null;
-            bookBindingSource.DataSource = filteredBooks;
+            int index = 0;
+            foreach (var book in filteredBooks)
+            {
+                Image coverImage;
+                if (!string.IsNullOrEmpty(book.ImageBase64))
+                {
+                    try
+                    {
+                        byte[] imageBytes = Convert.FromBase64String(book.ImageBase64);
+                        using (var ms = new MemoryStream(imageBytes))
+                        {
+                            coverImage = Image.FromStream(ms);
+                        }
+                    }
+                    catch
+                    {
+                        using (MemoryStream ms = new MemoryStream(Properties.Resources.book_png_3))
+                        {
+                            coverImage = Image.FromStream(ms);
+                        }
+                    }
+                }
+                else
+                {
+                    using (MemoryStream ms = new MemoryStream(Properties.Resources.book_png_3))
+                    {
+                        coverImage = Image.FromStream(ms);
+                    }
+                }
 
-            listBox1.DisplayMember = "Title";
+                listView1.LargeImageList.Images.Add(coverImage);
+
+                var item = new ListViewItem
+                {
+                    Text = book.Title,
+                    ImageIndex = index++,
+                    Tag = book
+                };
+                listView1.Items.Add(item);
+            }
 
             groupBox1.Text = $"Книги ({filteredBooks.Count} з {libraryManager.Books.Count})";
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
             UpdateListBox();
@@ -198,14 +240,27 @@ namespace Personal_library
 
             textBox4.Text = "";
             textBox3.Text = "";
-
-
-
-
-
-
-
         }
+
+        private void listView1_DoubleClick(object sender, EventArgs e)
+        {
+            if (listView1.SelectedItems.Count == 0) return;
+
+            var selectedItem = listView1.SelectedItems[0];
+            var selectedBook = selectedItem.Tag as Book;
+
+            using (var bookDetailsForm = new BookDetailsForm(selectedBook, libraryManager.Genres))
+            {
+                if (bookDetailsForm.ShowDialog() == DialogResult.OK)
+                {
+                    libraryManager.UpdateBook(bookDetailsForm.EditedBook);
+                    UpdateListBox();
+                    UpdateCombobox();
+                    isModified = true;
+                }
+            }
+        }
+
 
         private void textBox1_TextChanged(object sender, EventArgs e) { UpdateListBox(); }
         private void textBox2_TextChanged(object sender, EventArgs e) { UpdateListBox(); }

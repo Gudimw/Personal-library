@@ -1,4 +1,5 @@
 ﻿using Personal_library.Models;
+using System.Windows.Forms;
 
 namespace Personal_library.Forms
 {
@@ -185,5 +186,27 @@ namespace Personal_library.Forms
 
             return true;
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Завантажуємо зображення в PictureBox
+                    Image loadedImage = Image.FromFile(openFileDialog.FileName);
+
+                    // Конвертуємо зображення в Base64 для збереження у Book
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        loadedImage.Save(ms, loadedImage.RawFormat);
+                        byte[] imageBytes = ms.ToArray();
+                        EditedBook.ImageBase64 = Convert.ToBase64String(imageBytes);
+                    }
+                }
+            }
+        }
+
     }
 }

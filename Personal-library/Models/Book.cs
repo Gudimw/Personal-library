@@ -22,6 +22,8 @@ namespace Personal_library.Models
         public int Rating { get; set; }
         public string Description { get; set; } = string.Empty;
 
+        public string? ImageBase64 { get; set; }
+
         // Ці властивості не серіалізуються
         [JsonIgnore]
         public string GenreName { get; set; } = "Невідомий жанр";
