@@ -39,7 +39,7 @@
             AddNewBookToolStripMenuItem = new ToolStripMenuItem();
             GenresEditToolStripMenuItem = new ToolStripMenuItem();
             звітиToolStripMenuItem = new ToolStripMenuItem();
-            інвентаризаціяБібліотекиToolStripMenuItem = new ToolStripMenuItem();
+            LibraryStatsToolStripMenuItem = new ToolStripMenuItem();
             splitContainer1 = new SplitContainer();
             groupBox1 = new GroupBox();
             listBox1 = new ListBox();
@@ -69,7 +69,6 @@
             textBox1 = new TextBox();
             label1 = new Label();
             button1 = new Button();
-            PublisherEditToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -116,7 +115,7 @@
             // 
             // EditToolStripMenuItem
             // 
-            EditToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { EditSelectedBookToolStripMenuItem, DeleteChoosedBookToolStripMenuItem, AddNewBookToolStripMenuItem, GenresEditToolStripMenuItem, PublisherEditToolStripMenuItem });
+            EditToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { EditSelectedBookToolStripMenuItem, DeleteChoosedBookToolStripMenuItem, AddNewBookToolStripMenuItem, GenresEditToolStripMenuItem });
             EditToolStripMenuItem.Name = "EditToolStripMenuItem";
             EditToolStripMenuItem.Size = new Size(87, 20);
             EditToolStripMenuItem.Text = "Редагування";
@@ -151,16 +150,17 @@
             // 
             // звітиToolStripMenuItem
             // 
-            звітиToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { інвентаризаціяБібліотекиToolStripMenuItem });
+            звітиToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { LibraryStatsToolStripMenuItem });
             звітиToolStripMenuItem.Name = "звітиToolStripMenuItem";
             звітиToolStripMenuItem.Size = new Size(47, 20);
             звітиToolStripMenuItem.Text = "Звіти";
             // 
-            // інвентаризаціяБібліотекиToolStripMenuItem
+            // LibraryStatsToolStripMenuItem
             // 
-            інвентаризаціяБібліотекиToolStripMenuItem.Name = "інвентаризаціяБібліотекиToolStripMenuItem";
-            інвентаризаціяБібліотекиToolStripMenuItem.Size = new Size(216, 22);
-            інвентаризаціяБібліотекиToolStripMenuItem.Text = "Інвентаризація бібліотеки";
+            LibraryStatsToolStripMenuItem.Name = "LibraryStatsToolStripMenuItem";
+            LibraryStatsToolStripMenuItem.Size = new Size(216, 22);
+            LibraryStatsToolStripMenuItem.Text = "Інвентаризація бібліотеки";
+            LibraryStatsToolStripMenuItem.Click += LibraryStatsToolStripMenuItem_Click;
             // 
             // splitContainer1
             // 
@@ -471,13 +471,6 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // PublisherEditToolStripMenuItem
-            // 
-            PublisherEditToolStripMenuItem.Name = "PublisherEditToolStripMenuItem";
-            PublisherEditToolStripMenuItem.Size = new Size(217, 22);
-            PublisherEditToolStripMenuItem.Text = "Редактор видавництв";
-            PublisherEditToolStripMenuItem.Click += PublisherEditToolStripMenuItem_Click;
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -517,7 +510,7 @@
         private ToolStripMenuItem EditSelectedBookToolStripMenuItem;
         private ToolStripMenuItem DeleteChoosedBookToolStripMenuItem;
         private ToolStripMenuItem звітиToolStripMenuItem;
-        private ToolStripMenuItem інвентаризаціяБібліотекиToolStripMenuItem;
+        private ToolStripMenuItem LibraryStatsToolStripMenuItem;
         private SplitContainer splitContainer1;
         private ListBox listBox1;
         private BindingSource bookBindingSource;
@@ -550,6 +543,5 @@
         private ToolStripMenuItem AddNewBookToolStripMenuItem;
         private ToolStripMenuItem SaveLibraryToolStripMenuItem;
         private ToolStripMenuItem GenresEditToolStripMenuItem;
-        private ToolStripMenuItem PublisherEditToolStripMenuItem;
     }
 }

@@ -23,7 +23,6 @@ namespace Personal_library.Models
 
         /// <summary>
         /// Ініціалізує LibraryManager з даними за замовчуванням, якщо колекції порожні.
-        /// Цей метод викликається після десеріалізації або при створенні нового LibraryManager.
         /// </summary>
         public void InitializeDefaultData()
         {
@@ -33,22 +32,6 @@ namespace Personal_library.Models
                 Genres.Add(new Genre { Name = "Детектив", Description = "Жанр, зосереджений на розслідуванні злочинів." });
                 Genres.Add(new Genre { Name = "Роман", Description = "Літературний жанр, що розповідає про події та досвід персонажів." });
             }
-
-            // if (!Books.Any() && Genres.Any() && Publishers.Any())
-            // {
-            //     Books.Add(new Book
-            //     {
-            //         Title = "Дюна",
-            //         Author = "Френк Герберт",
-            //         PublisherId = Publishers.FirstOrDefault(p => p.Name == "Книголав")?.Id ?? Guid.Empty,
-            //         PublicationYear = 1965,
-            //         GenreId = Genres.FirstOrDefault(g => g.Name == "Фантастика")?.Id ?? Guid.Empty,
-            //         Origin = "Куплена",
-            //         IsAvailable = true,
-            //         Rating = 5,
-            //         Description = "Епічний науково-фантастичний роман."
-            //     });
-            // }
         }
 
         /// <summary>
@@ -276,6 +259,35 @@ namespace Personal_library.Models
             {
                 throw new ArgumentException($"Жанр з ID {updatedGenre.Id} не знайдено для оновлення.");
             }
+        }
+
+        public LibraryStats GetLibraryStatistics()
+        {
+            LibraryStats stats = new LibraryStats();
+
+            stats.TotalBooks = Books.Count;
+
+            stats.AvailableBooks = Books.Count(b => b.IsAvailable);
+            stats.LentBooks = Books.Count(b => !b.IsAvailable);
+
+            stats.BooksByGenre = Books
+                .GroupBy(book => book.GenreId)
+                .Join(Genres,
+                      bookGroup => bookGroup.Key,
+                      genre => genre.Id,
+                      (bookGroup, genre) => new { GenreName = genre.Name, Count = bookGroup.Count() })
+                .ToDictionary(g => g.GenreName, g => g.Count);
+
+            if (Books.Any())
+            {
+                stats.AverageRating = Books.Average(b => b.Rating);
+            }
+            else
+            {
+                stats.AverageRating = 0;
+            }
+
+            return stats;
         }
     }
 }
