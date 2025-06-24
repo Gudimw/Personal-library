@@ -15,6 +15,7 @@ namespace Personal_library.Models
         public string PublisherName { get; set; } = "Невідомий видавець";
         public int PublicationYear { get; set; }
         public Guid GenreId { get; set; }
+        public string LibrarySection { get; set; } = "Невизначено";
         public string Origin { get; set; } = string.Empty;
         public bool IsAvailable { get; set; }
         public string LentTo { get; set; } = string.Empty;

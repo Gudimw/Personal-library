@@ -45,6 +45,8 @@
             listBox1 = new ListBox();
             bookBindingSource = new BindingSource(components);
             groupBox2 = new GroupBox();
+            label10 = new Label();
+            comboBox4 = new ComboBox();
             groupBox4 = new GroupBox();
             radioButton3 = new RadioButton();
             radioButton2 = new RadioButton();
@@ -209,6 +211,8 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(label10);
+            groupBox2.Controls.Add(comboBox4);
             groupBox2.Controls.Add(groupBox4);
             groupBox2.Controls.Add(groupBox3);
             groupBox2.Controls.Add(label7);
@@ -234,12 +238,31 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Пошук";
             // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(8, 113);
+            label10.Name = "label10";
+            label10.Size = new Size(45, 15);
+            label10.TabIndex = 19;
+            label10.Text = "Розділ:";
+            // 
+            // comboBox4
+            // 
+            comboBox4.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox4.FormattingEnabled = true;
+            comboBox4.Location = new Point(55, 110);
+            comboBox4.Name = "comboBox4";
+            comboBox4.Size = new Size(264, 23);
+            comboBox4.TabIndex = 18;
+            comboBox4.SelectedIndexChanged += comboBox4_SelectedIndexChanged;
+            // 
             // groupBox4
             // 
             groupBox4.Controls.Add(radioButton3);
             groupBox4.Controls.Add(radioButton2);
             groupBox4.Controls.Add(radioButton1);
-            groupBox4.Location = new Point(207, 246);
+            groupBox4.Location = new Point(207, 276);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(115, 100);
             groupBox4.TabIndex = 17;
@@ -287,7 +310,7 @@
             groupBox3.Controls.Add(textBox3);
             groupBox3.Controls.Add(label9);
             groupBox3.Controls.Add(label8);
-            groupBox3.Location = new Point(8, 246);
+            groupBox3.Location = new Point(8, 276);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(125, 80);
             groupBox3.TabIndex = 15;
@@ -331,7 +354,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(8, 205);
+            label7.Location = new Point(8, 235);
             label7.Name = "label7";
             label7.Size = new Size(64, 15);
             label7.TabIndex = 14;
@@ -340,7 +363,7 @@
             // trackBar2
             // 
             trackBar2.LargeChange = 1;
-            trackBar2.Location = new Point(95, 195);
+            trackBar2.Location = new Point(95, 225);
             trackBar2.Maximum = 5;
             trackBar2.Minimum = 1;
             trackBar2.Name = "trackBar2";
@@ -352,7 +375,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(8, 178);
+            label6.Location = new Point(8, 208);
             label6.Name = "label6";
             label6.Size = new Size(66, 15);
             label6.TabIndex = 12;
@@ -361,7 +384,7 @@
             // trackBar1
             // 
             trackBar1.LargeChange = 1;
-            trackBar1.Location = new Point(95, 168);
+            trackBar1.Location = new Point(95, 198);
             trackBar1.Maximum = 5;
             trackBar1.Minimum = 1;
             trackBar1.Name = "trackBar1";
@@ -373,7 +396,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(8, 142);
+            label5.Location = new Point(8, 172);
             label5.Name = "label5";
             label5.Size = new Size(115, 15);
             label5.TabIndex = 10;
@@ -383,7 +406,7 @@
             // 
             comboBox3.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(129, 139);
+            comboBox3.Location = new Point(129, 169);
             comboBox3.Name = "comboBox3";
             comboBox3.Size = new Size(190, 23);
             comboBox3.TabIndex = 9;
@@ -392,7 +415,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(8, 113);
+            label4.Location = new Point(8, 143);
             label4.Name = "label4";
             label4.Size = new Size(81, 15);
             label4.TabIndex = 8;
@@ -402,7 +425,7 @@
             // 
             comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(95, 110);
+            comboBox2.Location = new Point(95, 140);
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(224, 23);
             comboBox2.TabIndex = 7;
@@ -543,5 +566,7 @@
         private ToolStripMenuItem AddNewBookToolStripMenuItem;
         private ToolStripMenuItem SaveLibraryToolStripMenuItem;
         private ToolStripMenuItem GenresEditToolStripMenuItem;
+        private Label label10;
+        private ComboBox comboBox4;
     }
 }

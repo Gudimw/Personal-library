@@ -36,7 +36,7 @@ namespace Personal_library.Forms
             comboBox1.ValueMember = "Id";
             comboBox1.DataSource = availableGenres;
 
-            // Заповнення ComboBox для походження книги
+            // Заповнення ComboBox
             comboBox2.Items.Clear();
             comboBox2.Items.Add("Куплена");
             comboBox2.Items.Add("Подарована");
@@ -44,6 +44,13 @@ namespace Personal_library.Forms
             comboBox2.Items.Add("Обмін");
             comboBox2.Items.Add("Інше");
             comboBox2.SelectedIndex = 0;
+
+            comboBox3.Items.Add("Спеціальна література");
+            comboBox3.Items.Add("Хобі");
+            comboBox3.Items.Add("Домашнє господарство");
+            comboBox3.Items.Add("Белетристика");
+            comboBox3.Items.Add("Інше");
+            comboBox3.SelectedIndex = 0;
         }
 
         private void LoadBookData()
@@ -80,6 +87,15 @@ namespace Personal_library.Forms
                 }
             }
 
+            if (!string.IsNullOrWhiteSpace(EditedBook.LibrarySection) && comboBox3.Items.Contains(EditedBook.LibrarySection))
+            {
+                comboBox3.SelectedItem = EditedBook.LibrarySection;
+            }
+            else
+            {
+                comboBox3.SelectedIndex = 0;
+            }
+
             checkBox1.Checked = EditedBook.IsAvailable;
             textBox4.Text = EditedBook.LentTo;
             trackBar1.Value = EditedBook.Rating > 0 ? EditedBook.Rating : 1; // Якщо 0, ставимо 1
@@ -96,6 +112,7 @@ namespace Personal_library.Forms
                 EditedBook.Author = textBox2.Text.Trim();
                 EditedBook.PublisherName = textBox3.Text.Trim();
                 EditedBook.PublicationYear = (int)numericUpDown1.Value;
+                EditedBook.LibrarySection = comboBox3.SelectedItem?.ToString() ?? "Невизначено";
 
                 if (comboBox1.SelectedItem is Genre selectedGenre)
                 {

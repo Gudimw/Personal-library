@@ -111,6 +111,12 @@ namespace Personal_library
                 filteredBooks = filteredBooks.Where(b => b.Origin.Equals(selectedOrigin, StringComparison.OrdinalIgnoreCase));
             }
 
+            if (comboBox4.SelectedItem != null && comboBox4.SelectedItem.ToString() != "Âñ³")
+            {
+                string selectedSection = comboBox4.SelectedItem.ToString();
+                filteredBooks = filteredBooks.Where(b => b.LibrarySection.Equals(selectedSection, StringComparison.OrdinalIgnoreCase));
+            }
+
             if (int.TryParse(textBox4.Text, out int yearFrom))
             {
                 filteredBooks = filteredBooks.Where(b => b.PublicationYear >= yearFrom);
@@ -145,10 +151,12 @@ namespace Personal_library
             comboBox1.Items.Clear();
             comboBox2.Items.Clear();
             comboBox3.Items.Clear();
+            comboBox4.Items.Clear();
 
             comboBox1.Items.Add("Âñ³");
             comboBox2.Items.Add("Âñ³");
             comboBox3.Items.Add("Âñ³");
+            comboBox4.Items.Add("Âñ³");
 
             var uniqueGenres = libraryManager.Genres.Select(g => g.Name).Distinct().OrderBy(name => name).ToList();
             foreach (var genreName in uniqueGenres)
@@ -168,15 +176,35 @@ namespace Personal_library
                 comboBox3.Items.Add(origin);
             }
 
+            var uniqueSections = libraryManager.Books
+                .Select(b => b.LibrarySection)
+                .Where(s => !string.IsNullOrWhiteSpace(s))
+                .Distinct()
+                .OrderBy(s => s)
+                .ToList();
+
+            foreach (var section in uniqueSections)
+            {
+                comboBox4.Items.Add(section);
+            }
+
             comboBox1.SelectedItem = "Âñ³";
             comboBox2.SelectedItem = "Âñ³";
             comboBox3.SelectedItem = "Âñ³";
+            comboBox4.SelectedItem = "Âñ³";
 
             label6.Text = $"Îö³íêà â³ä: {trackBar1.Value}";
             label7.Text = $"Îö³íêà äî: {trackBar2.Value}";
 
             textBox4.Text = "";
             textBox3.Text = "";
+
+
+
+
+
+
+
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e) { UpdateListBox(); }
@@ -191,7 +219,7 @@ namespace Personal_library
         private void radioButton1_CheckedChanged(object sender, EventArgs e) { UpdateListBox(); }
         private void radioButton2_CheckedChanged(object sender, EventArgs e) { UpdateListBox(); }
         private void radioButton3_CheckedChanged(object sender, EventArgs e) { UpdateListBox(); }
-
+        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e) { UpdateListBox(); }
         private void AddNewBookToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Book newBook = new Book();
@@ -350,7 +378,7 @@ namespace Personal_library
             {
                 genresManagerForm.ShowDialog();
 
-                InitializeFilterComboBoxes(); 
+                InitializeFilterComboBoxes();
                 UpdateListBox();
                 UpdateCombobox();
                 isModified = true;
@@ -447,7 +475,7 @@ namespace Personal_library
                 if (result == DialogResult.Yes)
                 {
                     SaveLibrary();
-                    if (isModified) 
+                    if (isModified)
                     {
                         return DialogResult.Cancel;
                     }
