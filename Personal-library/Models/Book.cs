@@ -36,26 +36,5 @@ namespace Personal_library.Models
             Rating = 1;
             PublicationYear = DateTime.Now.Year;
         }
-
-        // Додатковий конструктор або метод для копіювання
-        public Book Clone()
-        {
-            return new Book
-            {
-                Id = this.Id,
-                Title = this.Title,
-                Author = this.Author,
-                PublicationYear = this.PublicationYear,
-                GenreId = this.GenreId,
-                Origin = this.Origin,
-                IsAvailable = this.IsAvailable,
-                LentTo = this.LentTo,
-                Rating = this.Rating,
-                Description = this.Description,
-
-                GenreName = this.GenreName,
-                PublisherName = this.PublisherName
-            };
-        }
     }
 }

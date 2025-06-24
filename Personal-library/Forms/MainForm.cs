@@ -41,7 +41,7 @@ namespace Personal_library
                     libraryManager = libraryManager.Load(openFileDialog.FileName);
                     currentFilePath = openFileDialog.FileName;
                     isModified = false;
-                    UpdateListBox();
+                    UpdateListView();
                     InitializeFilterComboBoxes();
                     MessageBox.Show("Бібліотеку успішно завантажено!", "Відкриття", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -52,7 +52,7 @@ namespace Personal_library
             }
         }
 
-        private void UpdateListBox()
+        private void UpdateListView()
         {
             var filteredBooks = ApplyFilters();
             listView1.Items.Clear();
@@ -104,7 +104,7 @@ namespace Personal_library
 
         private void button1_Click(object sender, EventArgs e)
         {
-            UpdateListBox();
+            UpdateListView();
         }
 
         private List<Book> ApplyFilters()
@@ -248,26 +248,26 @@ namespace Personal_library
                 if (bookDetailsForm.ShowDialog() == DialogResult.OK)
                 {
                     libraryManager.UpdateBook(bookDetailsForm.EditedBook);
-                    UpdateListBox();
+                    UpdateListView();
                     UpdateCombobox();
                     isModified = true;
                 }
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e) { UpdateListBox(); }
-        private void textBox2_TextChanged(object sender, EventArgs e) { UpdateListBox(); }
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) { UpdateListBox(); }
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e) { UpdateListBox(); }
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e) { UpdateListBox(); }
-        private void trackBar1_Scroll(object sender, EventArgs e) { UpdateListBox(); }
-        private void trackBar2_Scroll(object sender, EventArgs e) { UpdateListBox(); }
-        private void textBox4_TextChanged(object sender, EventArgs e) { UpdateListBox(); }
-        private void textBox3_TextChanged(object sender, EventArgs e) { UpdateListBox(); }
-        private void radioButton1_CheckedChanged(object sender, EventArgs e) { UpdateListBox(); }
-        private void radioButton2_CheckedChanged(object sender, EventArgs e) { UpdateListBox(); }
-        private void radioButton3_CheckedChanged(object sender, EventArgs e) { UpdateListBox(); }
-        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e) { UpdateListBox(); }
+        private void textBox1_TextChanged(object sender, EventArgs e) { UpdateListView(); }
+        private void textBox2_TextChanged(object sender, EventArgs e) { UpdateListView(); }
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) { UpdateListView(); }
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e) { UpdateListView(); }
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e) { UpdateListView(); }
+        private void trackBar1_Scroll(object sender, EventArgs e) { UpdateListView(); }
+        private void trackBar2_Scroll(object sender, EventArgs e) { UpdateListView(); }
+        private void textBox4_TextChanged(object sender, EventArgs e) { UpdateListView(); }
+        private void textBox3_TextChanged(object sender, EventArgs e) { UpdateListView(); }
+        private void radioButton1_CheckedChanged(object sender, EventArgs e) { UpdateListView(); }
+        private void radioButton2_CheckedChanged(object sender, EventArgs e) { UpdateListView(); }
+        private void radioButton3_CheckedChanged(object sender, EventArgs e) { UpdateListView(); }
+        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e) { UpdateListView(); }
 
         private void AddNewBookToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -279,7 +279,7 @@ namespace Personal_library
                 {
                     Book addedBook = bookDetailsForm.EditedBook;
                     libraryManager.AddBook(addedBook);
-                    UpdateListBox();
+                    UpdateListView();
                     UpdateCombobox();
                     isModified = true;
                     MessageBox.Show($"Книгу '{addedBook.Title}' успішно додано!", "Додавання книги", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -309,7 +309,7 @@ namespace Personal_library
                 if (bookDetailsForm.ShowDialog() == DialogResult.OK)
                 {
                     libraryManager.UpdateBook(bookDetailsForm.EditedBook);
-                    UpdateListBox();
+                    UpdateListView();
                     UpdateCombobox();
                     isModified = true;
                     MessageBox.Show($"Книгу '{bookDetailsForm.EditedBook.Title}' успішно оновлено!", "Редагування книги", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -343,7 +343,7 @@ namespace Personal_library
                 try
                 {
                     libraryManager.DeleteBook(selectedBook.Id);
-                    UpdateListBox();
+                    UpdateListView();
                     UpdateCombobox();
                     isModified = true;
                     MessageBox.Show($"Книгу '{selectedBook.Title}' успішно видалено.", "Видалення книги", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -399,7 +399,7 @@ namespace Personal_library
                 genresManagerForm.ShowDialog();
 
                 InitializeFilterComboBoxes();
-                UpdateListBox();
+                UpdateListView();
                 UpdateCombobox();
                 isModified = true;
             }
