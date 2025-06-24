@@ -43,8 +43,6 @@
             splitContainer1 = new SplitContainer();
             groupBox1 = new GroupBox();
             listView1 = new ListView();
-            listBox1 = new ListBox();
-            bookBindingSource = new BindingSource(components);
             groupBox2 = new GroupBox();
             label10 = new Label();
             comboBox4 = new ComboBox();
@@ -72,18 +70,19 @@
             textBox1 = new TextBox();
             label1 = new Label();
             button1 = new Button();
+            bookBindingSource = new BindingSource(components);
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)bookBindingSource).BeginInit();
             groupBox2.SuspendLayout();
             groupBox4.SuspendLayout();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trackBar2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bookBindingSource).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -187,7 +186,6 @@
             // groupBox1
             // 
             groupBox1.Controls.Add(listView1);
-            groupBox1.Controls.Add(listBox1);
             groupBox1.Dock = DockStyle.Fill;
             groupBox1.Location = new Point(0, 0);
             groupBox1.Name = "groupBox1";
@@ -205,20 +203,6 @@
             listView1.Size = new Size(738, 546);
             listView1.TabIndex = 1;
             listView1.UseCompatibleStateImageBehavior = false;
-            // 
-            // listBox1
-            // 
-            listBox1.DataSource = bookBindingSource;
-            listBox1.FormattingEnabled = true;
-            listBox1.ItemHeight = 15;
-            listBox1.Location = new Point(418, 370);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(144, 109);
-            listBox1.TabIndex = 0;
-            // 
-            // bookBindingSource
-            // 
-            bookBindingSource.DataSource = typeof(Models.Book);
             // 
             // groupBox2
             // 
@@ -505,6 +489,10 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // bookBindingSource
+            // 
+            bookBindingSource.DataSource = typeof(Models.Book);
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -514,7 +502,7 @@
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Name = "MainForm";
-            Text = "Form1";
+            Text = "Домашня бібліотека";
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             splitContainer1.Panel1.ResumeLayout(false);
@@ -522,7 +510,6 @@
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)bookBindingSource).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             groupBox4.ResumeLayout(false);
@@ -531,6 +518,7 @@
             groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)trackBar2).EndInit();
             ((System.ComponentModel.ISupportInitialize)trackBar1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bookBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -546,7 +534,6 @@
         private ToolStripMenuItem звітиToolStripMenuItem;
         private ToolStripMenuItem LibraryStatsToolStripMenuItem;
         private SplitContainer splitContainer1;
-        private ListBox listBox1;
         private BindingSource bookBindingSource;
         private GroupBox groupBox1;
         private GroupBox groupBox2;

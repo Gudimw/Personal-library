@@ -21,7 +21,6 @@ namespace Personal_library
             InitializeFilterComboBoxes();
 
             this.AcceptButton = button1;
-            listBox1.MouseDoubleClick += booksListBox_MouseDoubleClick;
             this.FormClosing += MainForm_FormClosing;
             isModified = false;
         }
@@ -104,11 +103,6 @@ namespace Personal_library
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
-            UpdateListBox();
-        }
-
-        private void Filter_Changed(object sender, EventArgs e)
         {
             UpdateListBox();
         }
@@ -261,7 +255,6 @@ namespace Personal_library
             }
         }
 
-
         private void textBox1_TextChanged(object sender, EventArgs e) { UpdateListBox(); }
         private void textBox2_TextChanged(object sender, EventArgs e) { UpdateListBox(); }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) { UpdateListBox(); }
@@ -275,6 +268,7 @@ namespace Personal_library
         private void radioButton2_CheckedChanged(object sender, EventArgs e) { UpdateListBox(); }
         private void radioButton3_CheckedChanged(object sender, EventArgs e) { UpdateListBox(); }
         private void comboBox4_SelectedIndexChanged(object sender, EventArgs e) { UpdateListBox(); }
+
         private void AddNewBookToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Book newBook = new Book();
@@ -297,9 +291,9 @@ namespace Personal_library
         {
             Book selectedBook = null;
 
-            if (listBox1.SelectedItems.Count > 0)
+            if (listView1.SelectedItems.Count > 0)
             {
-                selectedBook = listBox1.SelectedItems[0] as Book;
+                selectedBook = listView1.SelectedItems[0].Tag as Book;
             }
 
             if (selectedBook == null)
@@ -327,9 +321,9 @@ namespace Personal_library
         {
             Book selectedBook = null;
 
-            if (listBox1.SelectedItems.Count > 0)
+            if (listView1.SelectedItems.Count > 0)
             {
-                selectedBook = listBox1.SelectedItems[0] as Book;
+                selectedBook = listView1.SelectedItems[0].Tag as Book;
             }
 
             if (selectedBook == null)
@@ -357,35 +351,6 @@ namespace Personal_library
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Помилка при видаленні книги: {ex.Message}", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void booksListBox_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (listBox1.SelectedItem == null)
-            {
-                return;
-            }
-            Book selectedBook = null;
-
-            selectedBook = listBox1.SelectedItem as Book;
-
-            if (selectedBook == null)
-            {
-                MessageBox.Show("Не вдалося знайти дані про вибрану книгу.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            using (BookDetailsForm bookDetailsForm = new BookDetailsForm(selectedBook, libraryManager.Genres))
-            {
-                if (bookDetailsForm.ShowDialog() == DialogResult.OK)
-                {
-                    libraryManager.UpdateBook(bookDetailsForm.EditedBook);
-                    UpdateListBox();
-                    UpdateCombobox();
-                    isModified = true;
-                    MessageBox.Show($"Книгу '{bookDetailsForm.EditedBook.Title}' успішно оновлено!", "Редагування книги", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
