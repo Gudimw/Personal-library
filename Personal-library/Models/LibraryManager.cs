@@ -35,22 +35,6 @@ namespace Personal_library.Models
         }
 
         /// <summary>
-        /// Повертає список книг, що належать до певного жанру.
-        /// </summary>
-        public List<Book> GetBooksByGenre(Guid genreId)
-        {
-            return Books.Where(b => b.GenreId == genreId).ToList();
-        }
-
-        /// <summary>
-        /// Повертає список книг, виданих певним видавцем.
-        /// </summary>
-        public List<Book> GetBooksByPublisher(string PublisherName)
-        {
-            return Books.Where(b => b.PublisherName == PublisherName).ToList();
-        }
-
-        /// <summary>
         /// Зберігає поточний стан бібліотеки в JSON файл.
         /// </summary>
         public void Save(string path)
@@ -98,7 +82,6 @@ namespace Personal_library.Models
                     deserializedLibrary.InitializeDefaultData();
 
                     deserializedLibrary.UpdateBooksGenreNames();
-                    deserializedLibrary.UpdateBooksPublisherNames();
 
                     Console.WriteLine($"Дані бібліотеки успішно завантажено з {path}");
                     return deserializedLibrary;
@@ -141,14 +124,6 @@ namespace Personal_library.Models
         }
 
         /// <summary>
-        /// Допоміжний метод для оновлення властивості PublisherName у кожній книзі
-        /// на основі Id видавця. Викликається після завантаження або зміни видавця.
-        /// </summary>
-        public void UpdateBooksPublisherNames()
-        {
-        }
-
-        /// <summary>
         /// Додає нову книгу до бібліотеки.
         /// </summary>
         public void AddBook(Book book)
@@ -156,7 +131,6 @@ namespace Personal_library.Models
             if (book == null) throw new ArgumentNullException(nameof(book));
             Books.Add(book);
             UpdateBooksGenreNames();
-            UpdateBooksPublisherNames();
         }
 
         /// <summary>
@@ -180,7 +154,6 @@ namespace Personal_library.Models
                 existingBook.Description = updatedBook.Description;
 
                 UpdateBooksGenreNames();
-                UpdateBooksPublisherNames();
             }
             else
             {
